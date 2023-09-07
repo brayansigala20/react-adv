@@ -6,15 +6,19 @@ import { props as TitleProps } from "../components/ProductTitle";
 export interface ProductContextProduct {
     counter: number;
     increaseBy: (value: number) => void;
-    product?: Producto ;
+    product?: Producto;
+    IsMaxValue?:number;
 }
 export interface ProductCardProps {
     product?: Producto;
-    children?: ReactElement | ReactElement[];
+    // children?: ReactElement | ReactElement[] ;
+    children?: (args:IProductCardHandler)=> JSX.Element;
     className?: string;
     style?: CSSProperties;
-    onChange?: (args:IProductOnchange) => void;
+    onChange?: (args: IProductOnchange) => void;
     value?: number;
+    initialValues: InitialValues;
+    IsMaxValue?:number;
 }
 export interface Producto {
     id: string | any;
@@ -28,6 +32,20 @@ export interface ProductCardHOCProps {
     Buttons: (Props: ButtonProps) => JSX.Element
 }
 export interface IProductOnchange {
-    product?:Producto;
-    count:number
+    product?: Producto;
+    count: number
+}
+export interface InitialValues {
+    counter?: number;
+    maxCount?: number;
+}
+
+export interface IProductCardHandler {
+    count: number;
+    isMaxReached: boolean;
+    product?: Producto;
+    maxCount?: number,
+
+    increaseBy: (value: number) => void;
+    reset: ()=> void;
 }
